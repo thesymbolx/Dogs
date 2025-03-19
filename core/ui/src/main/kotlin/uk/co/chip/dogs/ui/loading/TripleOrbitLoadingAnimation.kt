@@ -1,9 +1,10 @@
-package uk.co.chip.dogs.loading
+package uk.co.chip.dogs.ui.loading
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,9 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.uk.chip.dogs.design_system.DogsTheme
+import uk.co.chip.dogs.R
 
 private const val PADDING_PERCENTAGE_OUTER_CIRCLE = 0.15f
 private const val PADDING_PERCENTAGE_INNER_CIRCLE = 0.3f

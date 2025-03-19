@@ -2,6 +2,7 @@ package uk.co.chip.dogs
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
@@ -25,36 +26,10 @@ import uk.co.chip.dogs.ui.DogApp
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         setContent {
-
-//            Column {
-//                Text("number 1", color = Color.Black)
-//                Text("dalee dadiklahsiodjasioduj", color = Color.Black)
-//
-//                Text("dalee dadiklahsiodjasioduj", color = Color.Black)
-//
-//                Text("dalee dadiklahsiodjasioduj", color = Color.Black)
-//
-//                Text("dalee dadiklahsiodjasioduj", color = Color.Black)
-//                Text("dalee dadiklahsiodjasioduj", color = Color.Black)
-//                Text("dalee dadiklahsiodjasioduj", color = Color.Black)
-//
-//
-//                Box(Modifier.size(600.dp).background(Color.Blue), ) {  }
-//
-//
-//                Surface(
-//                    color = Color.Red,
-//                    modifier = Modifier.fillMaxSize(),
-//                ) {
-//
-//                }
-//
-
-  //          }
-
-
             DogApp()
         }
     }

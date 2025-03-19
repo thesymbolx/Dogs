@@ -1,4 +1,4 @@
-package uk.co.chip.dogs.loading.modifiers
+package uk.co.chip.dogs.ui.modifiers
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.ui.Modifier
