@@ -2,7 +2,7 @@ package co.uk.chip.dogs.breeds
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.uk.chip.dog.AllDogBreedsUseCase
+import co.uk.chip.dog.domain.AllDogBreedsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed

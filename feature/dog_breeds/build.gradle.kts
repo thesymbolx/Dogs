@@ -40,8 +40,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain:dog"))
+    implementation(project(":domain:breeds"))
     implementation(project(":core:network"))
+    implementation(project(":core:ui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

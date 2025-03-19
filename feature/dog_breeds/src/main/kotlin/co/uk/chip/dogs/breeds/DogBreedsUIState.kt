@@ -1,9 +1,9 @@
 package co.uk.chip.dogs.breeds
 
-import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.persistentMapOf
 
 data class DogBreedsUIState(
     val isLoading: Boolean = false,
-    val breeds: ImmutableList<String> = persistentListOf()
+    val breeds: ImmutableMap<String, List<String>> = persistentMapOf()
 )
