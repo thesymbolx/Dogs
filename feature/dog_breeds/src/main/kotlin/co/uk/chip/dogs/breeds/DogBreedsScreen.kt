@@ -1,6 +1,5 @@
 package co.uk.chip.dogs.breeds
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,9 +7,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
@@ -19,11 +22,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.BlendMode
@@ -32,14 +30,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.LifecycleResumeEffect
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import co.uk.chip.dog.domain.Dog
 import kotlinx.collections.immutable.ImmutableMap
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import uk.co.chip.dogs.ui.ErrorScreen
-import uk.co.chip.dogs.ui.loading.LoadingScreen
+import uk.co.chip.dogs.ui.LoadingScreen
 
 @Composable
 fun DogBreedsScreen(viewModel: DogBreedsViewModel = hiltViewModel()) {
@@ -59,7 +53,7 @@ private fun DogBreedsScreen(breeds: ImmutableMap<String, List<Dog>>) {
         Header()
 
         LazyColumn(
-            contentPadding = PaddingValues(16.dp),
+            contentPadding = PaddingValues(top = 16.dp, start = 16.dp, end = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             breeds.forEach { entry ->
@@ -67,9 +61,13 @@ private fun DogBreedsScreen(breeds: ImmutableMap<String, List<Dog>>) {
                     StickyCategory(entry.key)
                 }
 
-                items(items = entry.value, key = { it.breed + it.subBreed }) { breedName ->
+                items(items = entry.value, key = { it.id }) { breedName ->
                     DogBreed(breedName.breed, breedName.subBreed)
                 }
+            }
+
+            item {
+                Spacer(modifier = Modifier.windowInsetsBottomHeight(WindowInsets.navigationBars))
             }
         }
     }

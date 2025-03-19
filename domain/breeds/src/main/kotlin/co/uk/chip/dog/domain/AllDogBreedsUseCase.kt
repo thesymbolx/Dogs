@@ -1,8 +1,6 @@
 package co.uk.chip.dog.domain
 
-import android.util.Log
 import kotlinx.collections.immutable.ImmutableMap
-import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
 import uk.co.chip.dog.repository.DogRepository
 import uk.co.chip.network.networkResult.NetworkResult
@@ -21,12 +19,22 @@ class AllDogBreedsUseCase @Inject constructor(
 
             val dogs = breeds.flatMap { entry ->
                 if (entry.value.isEmpty()) {
-                    listOf(Dog(entry.key.uppercase(), null))
+                    val breed = entry.key.uppercase()
+                    listOf(
+                        Dog(
+                            id = breed,
+                            breed = breed,
+                            null
+                        )
+                    )
                 } else {
                     entry.value.map { value ->
+                        val breed = entry.key.uppercase()
+                        val subBreed = value.uppercase()
                         Dog(
-                            entry.key.uppercase(),
-                            value.uppercase()
+                            id = breed + subBreed,
+                            breed = breed,
+                            subBreed = subBreed
                         )
                     }
                 }
