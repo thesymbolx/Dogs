@@ -10,18 +10,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import co.uk.chip.dogs.design_system.DogsTheme
 
 @Composable
 fun DogApp() {
-    DogAppBackground(modifier = Modifier) {
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            contentWindowInsets = WindowInsets.navigationBars
-        ) { innerPadding ->
-            Box(
-                modifier = Modifier.padding(innerPadding)
-            ) {
-                NasaNavHost(navController)
+    val navController = rememberNavController()
+
+    DogsTheme(dynamicColor = false) {
+        DogAppBackground(modifier = Modifier) {
+            Scaffold(
+                modifier = Modifier.fillMaxSize(),
+                contentWindowInsets = WindowInsets.navigationBars
+            ) { innerPadding ->
+                Box(
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    DogNavHost(navController)
+                }
             }
         }
     }

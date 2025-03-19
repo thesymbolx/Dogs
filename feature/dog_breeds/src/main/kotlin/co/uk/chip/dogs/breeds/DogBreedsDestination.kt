@@ -12,9 +12,3 @@ fun NavGraphBuilder.dogBreedsDestination() {
         DogBreedsScreen()
     }
 }
-
-fun NavGraphBuilder.apodDestination() {
-    composable<DogBreedsRoute> {
-        ApodScreen()
-    }
-}

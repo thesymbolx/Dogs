@@ -12,5 +12,7 @@ fun DogBreedsScreen(viewModel: DogBreedsViewModel = hiltViewModel()) {
     Text("${uiState.breeds}")
 }
 
-@Composable
-fun DogBreedsScre
+//@Composable
+//fun DogBreedsScreen() {
+//
+//}
