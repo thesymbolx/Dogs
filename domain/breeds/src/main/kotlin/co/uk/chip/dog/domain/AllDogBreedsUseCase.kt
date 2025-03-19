@@ -1,6 +1,8 @@
 package co.uk.chip.dog.domain
 
+import android.util.Log
 import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toImmutableMap
 import uk.co.chip.dog.repository.DogRepository
 import uk.co.chip.network.networkResult.NetworkResult
@@ -10,20 +12,27 @@ import javax.inject.Inject
 class AllDogBreedsUseCase @Inject constructor(
     private val dogRepository: DogRepository
 ) {
-    suspend operator fun invoke(): NetworkResult<ImmutableMap<String, List<String>>> {
+    suspend operator fun invoke(): NetworkResult<ImmutableMap<String, List<Dog>>> {
 
         val result = dogRepository.getAllDogBreeds()
 
         return result.map { breedResponse ->
             val breeds: Map<String, List<String>> = breedResponse.breeds
-            val sortedBreeds = breeds.toSortedMap()
 
-
-            breeds.mapValues { entry ->
-                entry.value.map { value ->
-                    "$value ${entry.key}"
+            val dogs = breeds.flatMap { entry ->
+                if (entry.value.isEmpty()) {
+                    listOf(Dog(entry.key.uppercase(), null))
+                } else {
+                    entry.value.map { value ->
+                        Dog(
+                            entry.key.uppercase(),
+                            value.uppercase()
+                        )
+                    }
                 }
-            }.toImmutableMap()
+            }.sortedBy { it.breed }
+
+            dogs.groupBy { it.breed.first().uppercase() }.toImmutableMap()
         }
     }
 }

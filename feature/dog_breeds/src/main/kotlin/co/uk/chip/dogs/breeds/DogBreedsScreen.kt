@@ -2,13 +2,23 @@ package co.uk.chip.dogs.breeds
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -20,10 +30,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import co.uk.chip.dog.domain.Dog
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.PersistentMap
 import uk.co.chip.dogs.loading.LoadingScreen
+import uk.co.chip.dogs.loading.modifiers.parallaxLayoutModifier
 
 @Composable
 fun DogBreedsScreen(viewModel: DogBreedsViewModel = hiltViewModel()) {
@@ -37,20 +49,21 @@ fun DogBreedsScreen(viewModel: DogBreedsViewModel = hiltViewModel()) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun DogBreedsScreen(breeds: ImmutableMap<String, List<String>>) {
+private fun DogBreedsScreen(breeds: ImmutableMap<String, List<Dog>>) {
     Column {
         Header()
 
         LazyColumn(
-            contentPadding = PaddingValues(16.dp)
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             breeds.forEach { entry ->
                 stickyHeader {
-                    Text(entry.key, color = Color.Blue)
+                    StickyCategory(entry.key)
                 }
 
-                items(items = entry.value, key = { it }) { breedName ->
-                    DogBreed(breedName, "Shitwho")
+                items(items = entry.value, key = { it.breed + it.subBreed }) { breedName ->
+                    DogBreed(breedName.breed, breedName.subBreed)
                 }
             }
         }
@@ -58,13 +71,40 @@ private fun DogBreedsScreen(breeds: ImmutableMap<String, List<String>>) {
 }
 
 @Composable
-private fun DogBreed(breed: String, subBreed: String?) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column {
-            Text(text = breed)
+private fun StickyCategory(title: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        Text(
+            modifier = Modifier.padding(top = 8.dp, bottom = 8.dp),
+            text = title,
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.titleLarge
+        )
+    }
+}
 
-            if(subBreed != null) {
-                Text(text = subBreed)
+@Composable
+private fun DogBreed(breed: String, subBreed: String?) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(70.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = breed,
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            if (subBreed != null) {
+                Text(
+                    text = subBreed,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.primary
+                )
             }
         }
     }
