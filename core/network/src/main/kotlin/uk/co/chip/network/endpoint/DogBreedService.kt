@@ -4,8 +4,8 @@ import models.DogBreedResponse
 import retrofit2.http.GET
 import uk.co.chip.network.networkResult.NetworkResult
 
-interface BreedService {
+interface DogBreedService {
 
     @GET("breeds/list/all")
-    suspend fun getBreeds() : NetworkResult<DogBreedResponse>
+    suspend fun getAllBreeds() : NetworkResult<DogBreedResponse>
 }

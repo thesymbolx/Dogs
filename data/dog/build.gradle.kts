@@ -3,11 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
-    id("kotlinx-serialization")
 }
 
 android {
-    namespace = "uk.co.chip.network"
+    namespace = "uk.co.chip.dog"
     compileSdk = 35
 
     defaultConfig {
@@ -36,14 +35,13 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
+    implementation(project(":core:network"))
     ksp(libs.hilt.complier)
     implementation(libs.hilt)
-    implementation(libs.kotlinx.serialization.json)
 
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.ktx.serialization)
-    implementation(libs.kotlinx.serialization.json)
-    implementation(platform(libs.okhttp.bom))
+
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
 }

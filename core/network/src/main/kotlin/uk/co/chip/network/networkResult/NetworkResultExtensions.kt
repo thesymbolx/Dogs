@@ -7,9 +7,9 @@ fun <T : Any> NetworkResult<T>.onSuccess(
 }
 
 fun <T : Any> NetworkResult<T>.onError(
-    onResult: (throwable: Throwable) -> Unit
+    onResult: (code: Int?, message: String?, throwable: Throwable?) -> Unit
 ) = apply {
-    if(this is NetworkResult.Error) onResult(throwable)
+    if(this is NetworkResult.Error) onResult(code, message, throwable)
 }
 
 fun <T : Any, R : Any> NetworkResult<T>.map(
@@ -17,6 +17,7 @@ fun <T : Any, R : Any> NetworkResult<T>.map(
 ) : NetworkResult<R> {
     return when(this) {
         is NetworkResult.Success -> NetworkResult.Success(mapper(data))
-        is NetworkResult.Error -> NetworkResult.Error(throwable)
+        is NetworkResult.Error -> NetworkResult.Error(code, message, throwable)
     }
 }
+

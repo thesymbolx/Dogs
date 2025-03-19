@@ -42,6 +42,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:network"))
+    implementation(project(":data:dog"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

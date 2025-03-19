@@ -23,3 +23,4 @@ rootProject.name = "Dogs"
 include(":app")
 include(":core:network")
 include(":core:common")
+include(":data:dog")
