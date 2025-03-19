@@ -7,7 +7,10 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun DogBreedsScreen(viewModel: DogBreedViewModel = hiltViewModel()) {
+fun DogBreedsScreen(viewModel: DogBreedsViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsState()
     Text("${uiState.breeds}")
 }
+
+@Composable
+fun DogBreedsScre

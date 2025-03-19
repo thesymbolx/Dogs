@@ -1,4 +1,4 @@
-package uk.co.chip.dogs.ui.theme
+package co.uk.chip.dogs.design_system
 
 import androidx.compose.ui.graphics.Color
 

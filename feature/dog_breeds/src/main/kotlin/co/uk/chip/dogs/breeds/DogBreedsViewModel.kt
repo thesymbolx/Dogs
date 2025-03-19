@@ -14,16 +14,16 @@ import uk.co.chip.network.networkResult.NetworkResult
 import javax.inject.Inject
 
 @HiltViewModel
-class DogBreedViewModel @Inject constructor(
+class DogBreedsViewModel @Inject constructor(
     private val allDogBreedsUseCase : AllDogBreedsUseCase
 ): ViewModel() {
-    private val _uiState = MutableStateFlow(DogBreedUIState())
+    private val _uiState = MutableStateFlow(DogBreedsUIState())
     val uiState = _uiState
         .onStart { getDogBreeds() }
         .stateIn(
             viewModelScope,
             started = WhileSubscribed(5_000),
-            initialValue = DogBreedUIState()
+            initialValue = DogBreedsUIState()
         )
 
     private fun getDogBreeds() = viewModelScope.launch {
