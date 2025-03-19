@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import co.uk.chip.dog.domain.Dog
 import kotlinx.collections.immutable.ImmutableMap
+import uk.co.chip.dogs.ui.ErrorScreen
 import uk.co.chip.dogs.ui.loading.LoadingScreen
 
 @Composable
@@ -35,6 +36,7 @@ fun DogBreedsScreen(viewModel: DogBreedsViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsState()
 
     when {
+        uiState.isError -> ErrorScreen()
         uiState.isLoading -> LoadingScreen()
         else -> DogBreedsScreen(uiState.breeds)
     }

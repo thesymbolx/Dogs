@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DogBreedsViewModel @Inject constructor(
-    private val allDogBreedsUseCase : AllDogBreedsUseCase
-): ViewModel() {
+    private val allDogBreedsUseCase: AllDogBreedsUseCase
+) : ViewModel() {
     private val _uiState = MutableStateFlow(DogBreedsUIState())
     val uiState = _uiState
         .onStart { getDogBreeds() }
@@ -27,13 +27,19 @@ class DogBreedsViewModel @Inject constructor(
         )
 
     private fun getDogBreeds() = viewModelScope.launch {
-        _uiState.update { it.copy(isLoading = true) }
+        _uiState.update { it.copy(isError = false, isLoading = true) }
 
         when (val result = allDogBreedsUseCase()) {
-            is NetworkResult.Error -> TODO()
+            is NetworkResult.Error -> {
+                _uiState.update {
+                    it.copy(isError = true)
+                }
+            }
+
             is NetworkResult.Success -> {
                 _uiState.update {
                     it.copy(
+                        isError = false,
                         isLoading = false,
                         breeds = result.data
                     )
