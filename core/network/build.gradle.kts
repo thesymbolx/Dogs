@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    id("kotlinx-serialization")
 }
 
 android {
@@ -41,6 +42,7 @@ dependencies {
     implementation(libs.material)
     ksp(libs.hilt.complier)
     implementation(libs.hilt)
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.ktx.serialization)
