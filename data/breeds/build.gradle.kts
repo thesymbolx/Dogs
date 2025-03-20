@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "co.uk.chip.breeds"
+    namespace = "uk.co.chip.data"
     compileSdk = 35
 
     defaultConfig {
@@ -35,17 +35,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":data:breeds"))
     implementation(project(":core:network"))
+    ksp(libs.hilt.complier)
+    implementation(libs.hilt)
+
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    ksp(libs.hilt.complier)
-    implementation(libs.hilt)
-    implementation(libs.kotlinx.collections.immutable)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }
