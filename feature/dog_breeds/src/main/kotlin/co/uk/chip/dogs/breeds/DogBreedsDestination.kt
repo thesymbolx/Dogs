@@ -7,8 +7,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 object DogBreedsRoute
 
-fun NavGraphBuilder.dogBreedsDestination() {
+fun NavGraphBuilder.dogBreedsDestination(onBreedClick: (breed: String, sunBreed: String?) -> Unit) {
     composable<DogBreedsRoute> {
-        DogBreedsScreen()
+        DogBreedsScreen(onBreedClick = onBreedClick)
     }
 }

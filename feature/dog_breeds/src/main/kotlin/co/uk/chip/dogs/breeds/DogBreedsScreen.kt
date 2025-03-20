@@ -3,16 +3,19 @@ package co.uk.chip.dogs.breeds
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -36,19 +39,25 @@ import uk.co.chip.dogs.ui.ErrorScreen
 import uk.co.chip.dogs.ui.LoadingScreen
 
 @Composable
-fun DogBreedsScreen(viewModel: DogBreedsViewModel = hiltViewModel()) {
+fun DogBreedsScreen(
+    viewModel: DogBreedsViewModel = hiltViewModel(),
+    onBreedClick: (breed: String, subBreed: String?) -> Unit,
+) {
     val uiState by viewModel.uiState.collectAsState()
 
     when {
         uiState.isError -> ErrorScreen()
         uiState.isLoading -> LoadingScreen()
-        else -> DogBreedsScreen(uiState.breeds)
+        else -> DogBreedsScreen(uiState.breeds, onBreedClick)
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun DogBreedsScreen(breeds: ImmutableMap<String, List<Dog>>) {
+private fun DogBreedsScreen(
+    breeds: ImmutableMap<String, List<Dog>>,
+    onBreedClick: (breed: String, subBreed: String?) -> Unit
+) {
     Column {
         Header()
 
@@ -62,7 +71,7 @@ private fun DogBreedsScreen(breeds: ImmutableMap<String, List<Dog>>) {
                 }
 
                 items(items = entry.value, key = { it.id }) { breedName ->
-                    DogBreed(breedName.breed, breedName.subBreed)
+                    DogBreed(breedName.breed, breedName.subBreed, onBreedClick)
                 }
             }
 
@@ -90,11 +99,18 @@ private fun StickyCategory(title: String) {
 }
 
 @Composable
-private fun DogBreed(breed: String, subBreed: String?) {
+private fun DogBreed(
+    breed: String,
+    subBreed: String?,
+    onBreedClick: (breed: String, subBreed: String?) -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(70.dp)
+            .clickable {
+                onBreedClick(breed.lowercase(), subBreed?.lowercase())
+            }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(

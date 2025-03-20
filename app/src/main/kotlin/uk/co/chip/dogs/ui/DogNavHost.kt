@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import co.uk.chip.dogs.breeds.DogBreedsRoute
 import co.uk.chip.dogs.breeds.dogBreedsDestination
+import co.uk.chip.dogs.images.DogBreedImagesRoute
+import co.uk.chip.dogs.images.dogBreedImagesDestination
 
 @Composable
 fun DogNavHost(navController: NavHostController) {
@@ -15,6 +17,12 @@ fun DogNavHost(navController: NavHostController) {
         startDestination = DogBreedsRoute,
         modifier = Modifier.fillMaxSize()
     ) {
-        dogBreedsDestination()
+        dogBreedsDestination { breed, subBreed ->
+            navController.navigate(
+                DogBreedImagesRoute(breed, subBreed)
+            )
+        }
+
+        dogBreedImagesDestination()
     }
 }

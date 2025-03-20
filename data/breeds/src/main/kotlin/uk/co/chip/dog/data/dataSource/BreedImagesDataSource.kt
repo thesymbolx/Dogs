@@ -1,8 +1,9 @@
 package uk.co.chip.dog.data.dataSource
 
 import uk.co.chip.network.endpoint.BreedsImageService
+import javax.inject.Inject
 
-internal class BreedImagesDataSource(
+internal class BreedImagesDataSource @Inject constructor(
     private val breedsImageService: BreedsImageService
 ) {
     suspend fun getRandomBreedImages(breed: String, count: Int) =

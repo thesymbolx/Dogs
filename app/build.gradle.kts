@@ -47,6 +47,7 @@ dependencies {
     implementation(project(":data:breeds"))
     implementation(project(":feature:dog_breeds"))
     implementation(project(":core:design_system"))
+    implementation(project(":feature:dog_images"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -30,13 +30,12 @@ class DogBreedsViewModel @Inject constructor(
         _uiState.update { it.copy(isError = false, isLoading = true) }
 
         when (val result = allDogBreedsUseCase()) {
-            is NetworkResult.Error -> {
+            is NetworkResult.Error ->
                 _uiState.update {
-                    it.copy(isError = true)
+                    it.copy(isError = true, isLoading = false)
                 }
-            }
 
-            is NetworkResult.Success -> {
+            is NetworkResult.Success ->
                 _uiState.update {
                     it.copy(
                         isError = false,
@@ -44,7 +43,7 @@ class DogBreedsViewModel @Inject constructor(
                         breeds = result.data
                     )
                 }
-            }
+
         }
     }
 }
