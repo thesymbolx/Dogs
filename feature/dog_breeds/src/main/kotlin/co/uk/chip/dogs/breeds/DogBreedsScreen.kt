@@ -33,10 +33,13 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import co.uk.chip.dog.domain.Dog
+import co.uk.chip.dogs.design_system.DogsTheme
 import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.persistentMapOf
 import uk.co.chip.dogs.ui.ErrorScreen
 import uk.co.chip.dogs.ui.LoadingScreen
 
@@ -160,4 +163,40 @@ private fun Header() {
         painter = painterResource(uk.co.chip.dogs.R.drawable.dog1),
         contentDescription = null
     )
+}
+
+@Preview
+@Composable
+fun DogBreedsScreenPreview() {
+    val data =
+        persistentMapOf(
+            "A" to listOf(
+                Dog(
+                    id = "1",
+                    breed = "AKITA",
+                    subBreed = null
+                )
+            ),
+            "B" to listOf(
+                Dog(
+                    id = "2",
+                    breed = "BEAGLE",
+                    subBreed = null
+                ),
+                Dog(
+                    id = "3",
+                    breed = "BAKHARWAL",
+                    subBreed = "INDIAN"
+                )
+            )
+        )
+
+    DogsTheme {
+        DogBreedsScreen(
+            breeds = data,
+            isRefreshing = false,
+            onRefresh = {},
+            onBreedClick = { _, _ -> }
+        )
+    }
 }

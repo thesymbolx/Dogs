@@ -41,6 +41,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":data:breeds"))
     implementation(project(":core:ui"))
+    implementation(project(":core:design_system"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -53,10 +54,13 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.bundles.coil)
 
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.complier)
     implementation(libs.hilt)
+
+    debugImplementation(libs.ui.tooling)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
