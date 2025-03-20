@@ -17,6 +17,8 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -44,20 +46,27 @@ fun DogBreedImagesScreen(
     when {
         uiState.isError -> ErrorScreen()
         uiState.isLoading -> LoadingScreen()
-        else -> DogBreedImagesScreen(uiState.imageUrls)
+        else -> DogBreedImagesScreen(
+            imageUrls = uiState.imageUrls,
+            isRefreshing = uiState.isRefreshing,
+            onRefresh = { viewModel.onRefresh(breed, subBreed) }
+
+        )
     }
 
     LifecycleResumeEffect(breed, subBreed) {
         viewModel.getRandomBreedImages(breed, subBreed)
-        onPauseOrDispose {  }
+        onPauseOrDispose { }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DogBreedImagesScreen(imageUrls: ImmutableList<String>) {
-    
-
-
+fun DogBreedImagesScreen(
+    imageUrls: ImmutableList<String>,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit
+) {
     var showGallery: Boolean by remember {
         mutableStateOf(true)
     }
@@ -66,35 +75,40 @@ fun DogBreedImagesScreen(imageUrls: ImmutableList<String>) {
         mutableStateOf("")
     }
 
-    SharedTransitionLayout(
-        modifier = Modifier.fillMaxSize()
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh
     ) {
-        AnimatedContent(
-            modifier = Modifier.fillMaxSize(),
-            targetState = showGallery,
-            label = "image_transition"
-        ) { targetState ->
-            if (targetState) {
-                Thumbnails(
-                    imageUrls,
-                    animatedVisibilityScope = this@AnimatedContent
-                ) { imageUrl ->
-                    fullScreenImageUrl = imageUrl
-                    showGallery = false
-                }
-            } else {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    DogAsyncImage(
-                        imageUrl = fullScreenImageUrl,
-                        modifier = Modifier.sharedElement(
-                            rememberSharedContentState(key = fullScreenImageUrl),
-                            animatedVisibilityScope = this@AnimatedContent
-                        )
+        SharedTransitionLayout(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            AnimatedContent(
+                modifier = Modifier.fillMaxSize(),
+                targetState = showGallery,
+                label = "image_transition"
+            ) { targetState ->
+                if (targetState) {
+                    Thumbnails(
+                        imageUrls,
+                        animatedVisibilityScope = this@AnimatedContent
+                    ) { imageUrl ->
+                        fullScreenImageUrl = imageUrl
+                        showGallery = false
+                    }
+                } else {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
                     ) {
-                        showGallery = true
+                        DogAsyncImage(
+                            imageUrl = fullScreenImageUrl,
+                            modifier = Modifier.sharedElement(
+                                rememberSharedContentState(key = fullScreenImageUrl),
+                                animatedVisibilityScope = this@AnimatedContent
+                            )
+                        ) {
+                            showGallery = true
+                        }
                     }
                 }
             }

@@ -20,8 +20,10 @@ import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -48,35 +50,47 @@ fun DogBreedsScreen(
     when {
         uiState.isError -> ErrorScreen()
         uiState.isLoading -> LoadingScreen()
-        else -> DogBreedsScreen(uiState.breeds, onBreedClick)
+        else -> DogBreedsScreen(
+            breeds = uiState.breeds,
+            isRefreshing = uiState.isRefreshing,
+            onRefresh = viewModel::onRefresh,
+            onBreedClick = onBreedClick
+        )
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun DogBreedsScreen(
     breeds: ImmutableMap<String, List<Dog>>,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
     onBreedClick: (breed: String, subBreed: String?) -> Unit
 ) {
-    Column {
-        Header()
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh
+    ) {
+        Column {
+            Header()
 
-        LazyColumn(
-            contentPadding = PaddingValues(top = 16.dp, start = 16.dp, end = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            breeds.forEach { entry ->
-                stickyHeader {
-                    StickyCategory(entry.key)
+            LazyColumn(
+                contentPadding = PaddingValues(top = 16.dp, start = 16.dp, end = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                breeds.forEach { entry ->
+                    stickyHeader {
+                        StickyCategory(entry.key)
+                    }
+
+                    items(items = entry.value, key = { it.id }) { breedName ->
+                        DogBreed(breedName.breed, breedName.subBreed, onBreedClick)
+                    }
                 }
 
-                items(items = entry.value, key = { it.id }) { breedName ->
-                    DogBreed(breedName.breed, breedName.subBreed, onBreedClick)
+                item {
+                    Spacer(modifier = Modifier.windowInsetsBottomHeight(WindowInsets.navigationBars))
                 }
-            }
-
-            item {
-                Spacer(modifier = Modifier.windowInsetsBottomHeight(WindowInsets.navigationBars))
             }
         }
     }

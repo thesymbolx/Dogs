@@ -7,5 +7,6 @@ import kotlinx.collections.immutable.persistentMapOf
 data class DogBreedsUIState(
     val isError: Boolean = false,
     val isLoading: Boolean = false,
+    val isRefreshing: Boolean = false,
     val breeds: ImmutableMap<String, List<Dog>> = persistentMapOf()
 )

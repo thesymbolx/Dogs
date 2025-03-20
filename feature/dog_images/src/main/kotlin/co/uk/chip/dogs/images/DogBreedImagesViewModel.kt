@@ -28,9 +28,16 @@ class DogBreedImagesViewModel @Inject constructor(
 
     fun getRandomBreedImages(
         breed: String,
-        subBreed: String?
+        subBreed: String?,
+        isRefreshing: Boolean = false
     ) = viewModelScope.launch {
-        _uiState.update { it.copy(isError = false, isLoading = true) }
+        _uiState.update {
+            it.copy(
+                isError = false,
+                isLoading = !isRefreshing,
+                isRefreshing = isRefreshing
+            )
+        }
 
         val result = if (subBreed != null)
             breedImageRepository.getRandomSubBreedImages(breed, subBreed, 10)
@@ -40,16 +47,31 @@ class DogBreedImagesViewModel @Inject constructor(
         when (result) {
             is NetworkResult.Error ->
                 _uiState.update {
-                    it.copy(isError = true, isLoading = false)
+                    it.copy(
+                        isError = true,
+                        isLoading = false,
+                        isRefreshing = false
+                    )
                 }
 
             is NetworkResult.Success ->
                 _uiState.update {
                     it.copy(
                         isLoading = false,
+                        isRefreshing = false,
+                        isError = false,
                         imageUrls = result.data.images.toImmutableList()
                     )
                 }
         }
     }
+
+    fun onRefresh(
+        breed: String,
+        subBreed: String?
+    ) = getRandomBreedImages(
+        breed = breed,
+        subBreed = subBreed,
+        isRefreshing = true
+    )
 }

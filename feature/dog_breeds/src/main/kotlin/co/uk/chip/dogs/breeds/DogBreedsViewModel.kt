@@ -26,13 +26,23 @@ class DogBreedsViewModel @Inject constructor(
             initialValue = DogBreedsUIState()
         )
 
-    private fun getDogBreeds() = viewModelScope.launch {
-        _uiState.update { it.copy(isError = false, isLoading = true) }
+    private fun getDogBreeds(isRefreshing: Boolean = false) = viewModelScope.launch {
+        _uiState.update {
+            it.copy(
+                isError = false,
+                isLoading = !isRefreshing,
+                isRefreshing = isRefreshing
+            )
+        }
 
         when (val result = allDogBreedsUseCase()) {
             is NetworkResult.Error ->
                 _uiState.update {
-                    it.copy(isError = true, isLoading = false)
+                    it.copy(
+                        isError = true,
+                        isLoading = false,
+                        isRefreshing = false
+                    )
                 }
 
             is NetworkResult.Success ->
@@ -40,10 +50,13 @@ class DogBreedsViewModel @Inject constructor(
                     it.copy(
                         isError = false,
                         isLoading = false,
+                        isRefreshing = false,
                         breeds = result.data
                     )
                 }
 
         }
     }
+
+    fun onRefresh() = getDogBreeds(isRefreshing = true)
 }
