@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.kotlinx.collections.immutable)
 
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.coroutine.test)

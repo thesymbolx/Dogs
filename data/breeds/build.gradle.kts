@@ -45,6 +45,7 @@ dependencies {
 
     implementation(libs.androidx.annotation) // Or the latest version
 
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.coroutine.test)
