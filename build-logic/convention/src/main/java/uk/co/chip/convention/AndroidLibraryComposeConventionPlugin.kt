@@ -15,6 +15,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("org.jetbrains.kotlin.plugin.compose")
+                apply("kotlinx-serialization")
             }
 
             val extension = extensions.getByType<LibraryExtension>()
@@ -39,6 +40,11 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
                     add("implementation", libs.findLibrary("androidx-navigation-compose").get())
                     add("implementation", libs.findLibrary("androidx.material3").get())
                     add("debugImplementation", libs.findLibrary("ui.tooling").get())
+
+                    //Need for type safe navigation
+                    add("implementation", libs.findLibrary("kotlinx.serialization.json").get())
+                    //Need for UiState recompositions
+                    add("implementation", libs.findLibrary("kotlinx.collections.immutable").get())
                 }
             }
 

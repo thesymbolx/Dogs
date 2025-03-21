@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("kotlinx-serialization")
     id("uk.co.chip.convention.library")
     id("uk.co.chip.convention.compose")
     id("uk.co.chip.convention.hilt")
@@ -18,9 +17,6 @@ dependencies {
     implementation(project(":data:breeds"))
     implementation(project(":core:ui"))
     implementation(project(":core:design_system"))
-
-    implementation(libs.kotlinx.collections.immutable)
-    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.bundles.coil)
 
