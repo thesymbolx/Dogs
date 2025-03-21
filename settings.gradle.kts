@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 rootProject.name = "Dogs"
 include(":app")
 include(":core:network")
-include(":core:common")
+include(":core:test")
 include(":data:breeds")
 include(":feature:dog_breeds")
 include(":domain:breeds")

@@ -64,7 +64,7 @@ fun DogBreedsScreen(
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
-private fun DogBreedsScreen(
+fun DogBreedsScreen(
     breeds: ImmutableMap<String, List<Dog>>,
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
