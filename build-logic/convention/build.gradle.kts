@@ -28,5 +28,10 @@ gradlePlugin {
             id = "uk.co.chip.convention.library"
             implementationClass = "uk.co.chip.convention.AndroidLibraryConventionPlugin"
         }
+
+        create("androidCompose") {
+            id = "uk.co.chip.convention.compose"
+            implementationClass = "uk.co.chip.convention.AndroidLibraryComposeConventionPlugin"
+        }
     }
 }
