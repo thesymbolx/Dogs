@@ -155,15 +155,16 @@ private fun SharedTransitionScope.Thumbnails(
         modifier = Modifier.fillMaxSize()
     ) {
         items(items = imageUrls, key = { it }) { imageUrl ->
-            DogAsyncImage(
-                imageUrl = imageUrl,
+            Box(
                 modifier = Modifier
                     .sharedElement(
                         rememberSharedContentState(key = imageUrl),
                         animatedVisibilityScope = animatedVisibilityScope
                     )
             ) {
-                imageClicked(imageUrl)
+                DogAsyncImage(imageUrl = imageUrl) {
+                    imageClicked(imageUrl)
+                }
             }
         }
     }

@@ -61,9 +61,6 @@ fun DogAsyncImage(
                 )
             }
         },
-        onSuccess = {
-
-        },
         error = {
             Row(
                 modifier = Modifier
