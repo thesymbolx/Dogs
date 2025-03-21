@@ -4,6 +4,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
 import androidx.test.platform.app.InstrumentationRegistry
@@ -40,5 +41,21 @@ class DogBreedsImagesUITest {
 
         composeTestRule.onNodeWithTag(data[0]).assertIsDisplayed()
         composeTestRule.onNodeWithTag(data[1]).assertIsDisplayed()
+    }
+
+    @Test
+    fun breedImagesEmptyStateTest() {
+        val data = persistentListOf<String>()
+        val emptyMessage = composeTestRule.activity.getString(R.string.empty_images)
+
+        composeTestRule.setContent {
+            DogBreedImagesScreen(
+                imageUrls = data,
+                isRefreshing = false,
+                onRefresh = {}
+            )
+        }
+
+        composeTestRule.onNodeWithText(emptyMessage).assertIsDisplayed()
     }
 }

@@ -76,7 +76,7 @@ fun DogBreedImagesScreen(
         ) {
             Text(
                 stringResource(R.string.empty_images),
-                style = MaterialTheme.typography.displayMedium
+                style = MaterialTheme.typography.bodyMedium
             )
         }
     } else {
