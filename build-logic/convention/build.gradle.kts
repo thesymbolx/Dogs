@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     `kotlin-dsl`
 }
@@ -14,10 +16,16 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
+    }
+}
+
 gradlePlugin {
     plugins {
-        create("androidLibraryConventionPlugin") {
-            id = "uk.co.chip.convention.application.lib"
+        create("androidLibrary") {
+            id = "uk.co.chip.convention.library"
             implementationClass = "uk.co.chip.convention.AndroidLibraryConventionPlugin"
         }
     }

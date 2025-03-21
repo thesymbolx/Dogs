@@ -21,7 +21,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = 35
-              //  defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")

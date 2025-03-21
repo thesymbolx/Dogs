@@ -3,15 +3,11 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
-    id("uk.co.chip.convention.application.lib")
+    id("uk.co.chip.convention.library")
 }
 
 android {
-    namespace = "co.uk.chip.breeds"
-
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
+    namespace = "uk.co.chip.breeds"
 }
 
 dependencies {
