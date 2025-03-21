@@ -9,6 +9,6 @@ class BreedImagesDataSource @Inject constructor(
     suspend fun getRandomBreedImages(breed: String, count: Int) =
         breedsImageService.getRandomBreedImages(breed, count)
 
-    suspend fun getSubBreedImages(breed: String, subBreed: String, count: Int) =
+    suspend fun getRandomSubBreedImages(breed: String, subBreed: String, count: Int) =
         breedsImageService.getRandomSubBreedImages(breed, subBreed, count)
 }

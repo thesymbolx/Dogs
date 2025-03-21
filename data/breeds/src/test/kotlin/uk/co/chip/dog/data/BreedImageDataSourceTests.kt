@@ -45,7 +45,7 @@ class BreedImageDataSourceTests {
 
         val breedImagesDataSource = BreedImagesDataSource(breedsImageService)
 
-        val result = breedImagesDataSource.getSubBreedImages("bulldog", "british", 10)
+        val result = breedImagesDataSource.getRandomSubBreedImages("bulldog", "british", 10)
         val resultData = (result as NetworkResult.Success).data
 
         assertEquals(data, resultData)

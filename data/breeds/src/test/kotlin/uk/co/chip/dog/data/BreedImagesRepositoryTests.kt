@@ -7,7 +7,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import uk.co.chip.dog.data.dataSource.BreedImagesDataSource
 import uk.co.chip.dog.data.model.BreedsImages
-import uk.co.chip.dog.data.model.DogBreeds
 import uk.co.chip.dog.data.repository.BreedImageRepositoryImpl
 import uk.co.chip.network.models.BreedsImageResponse
 import uk.co.chip.network.networkResult.NetworkResult
@@ -46,7 +45,7 @@ class BreedImagesRepositoryTests {
         )
 
         val breedsImagesDataSource: BreedImagesDataSource = mockk {
-            coEvery { getSubBreedImages(any(), any(), any()) } coAnswers { NetworkResult.Success(data) }
+            coEvery { getRandomSubBreedImages(any(), any(), any()) } coAnswers { NetworkResult.Success(data) }
         }
 
         val breedImageRepositoryImpl = BreedImageRepositoryImpl(breedsImagesDataSource)

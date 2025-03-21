@@ -1,6 +1,5 @@
 package uk.co.chip.dog.data.repository
 
-import androidx.annotation.VisibleForTesting
 import uk.co.chip.dog.data.dataSource.BreedImagesDataSource
 import uk.co.chip.dog.data.mapper.toBreedsImages
 import uk.co.chip.network.models.BreedsImageResponse
@@ -22,7 +21,7 @@ class BreedImageRepositoryImpl @Inject constructor(
         subBreed: String,
         count: Int
     ) = breedsImagesDataSource
-        .getSubBreedImages(breed, subBreed, count)
+        .getRandomSubBreedImages(breed, subBreed, count)
         .map(BreedsImageResponse::toBreedsImages)
 
 }
