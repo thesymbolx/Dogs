@@ -17,7 +17,7 @@ import uk.co.chip.dog.data.repository.BreedImageRepository
 import uk.co.chip.network.networkResult.NetworkResult
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class ExampleUnitTest {
+class DodImageViewModelTests {
     @JvmField
     @Rule
     val mainDispatcherRule = MainDispatcherRule(UnconfinedTestDispatcher())

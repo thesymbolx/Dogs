@@ -1,12 +1,13 @@
 package uk.co.chip.dog.data.repository
 
+import androidx.annotation.VisibleForTesting
 import uk.co.chip.dog.data.dataSource.BreedImagesDataSource
 import uk.co.chip.dog.data.mapper.toBreedsImages
 import uk.co.chip.network.models.BreedsImageResponse
 import uk.co.chip.network.networkResult.map
 import javax.inject.Inject
 
-internal class BreedImageRepositoryImpl @Inject constructor(
+class BreedImageRepositoryImpl @Inject constructor(
     private val breedsImagesDataSource: BreedImagesDataSource
 ) : BreedImageRepository {
     override suspend fun getRandomBreedImages(
