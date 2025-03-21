@@ -29,6 +29,11 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             dependencies {
                 add("implementation", libs.findLibrary("androidx-core-ktx").get())
                 add("implementation", libs.findLibrary("androidx-appcompat").get())
+
+                add("testImplementation", libs.findLibrary("junit").get())
+                add("testImplementation", libs.findLibrary("mockk").get())
+                add("testImplementation", libs.findLibrary("coroutine-test").get())
+                add("testImplementation", libs.findLibrary("androidx-junit").get())
             }
         }
     }

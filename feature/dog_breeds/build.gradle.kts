@@ -16,13 +16,5 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:ui"))
     implementation(project(":core:design_system"))
-
-
-    testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.coroutine.test)
     testImplementation(project(":core:test"))
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.ui.test.manifest)
-    androidTestImplementation(libs.androidx.ui.test.junit4)
 }

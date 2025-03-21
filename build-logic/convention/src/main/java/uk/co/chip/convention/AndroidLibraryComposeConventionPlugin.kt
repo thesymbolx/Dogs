@@ -39,12 +39,16 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
 
                     add("implementation", libs.findLibrary("androidx-navigation-compose").get())
                     add("implementation", libs.findLibrary("androidx.material3").get())
-                    add("debugImplementation", libs.findLibrary("ui.tooling").get())
+                    add("implementation", libs.findLibrary("ui.tooling").get())
+                    add("implementation", libs.findLibrary("androidx.ui.tooling.preview.android").get())
 
                     //Need for type safe navigation
                     add("implementation", libs.findLibrary("kotlinx.serialization.json").get())
                     //Need for UiState recompositions
                     add("implementation", libs.findLibrary("kotlinx.collections.immutable").get())
+
+                    add("androidTestImplementation", libs.findLibrary("androidx.ui.test.manifest").get())
+                    add("androidTestImplementation", libs.findLibrary("androidx.ui.test.junit4").get())
                 }
             }
 

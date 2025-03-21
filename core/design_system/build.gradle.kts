@@ -8,9 +8,3 @@ plugins {
 android {
     namespace = "co.uk.chip.dogs.design_system"
 }
-
-dependencies {
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-}

@@ -11,10 +11,5 @@ android {
 
 dependencies {
     implementation(project(":core:network"))
-
-    testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.coroutine.test)
     testImplementation(project(":core:test"))
-    androidTestImplementation(libs.androidx.junit)
 }

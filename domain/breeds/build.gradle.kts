@@ -12,12 +12,7 @@ android {
 dependencies {
     implementation(project(":data:breeds"))
     implementation(project(":core:network"))
+    testImplementation(project(":core:test"))
 
     implementation(libs.kotlinx.collections.immutable)
-
-    testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.coroutine.test)
-    testImplementation(project(":core:test"))
-    androidTestImplementation(libs.androidx.junit)
 }

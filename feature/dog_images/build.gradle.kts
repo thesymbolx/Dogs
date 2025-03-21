@@ -17,14 +17,7 @@ dependencies {
     implementation(project(":data:breeds"))
     implementation(project(":core:ui"))
     implementation(project(":core:design_system"))
+    testImplementation(project(":core:test"))
 
     implementation(libs.bundles.coil)
-
-    testImplementation(libs.junit)
-    testImplementation(libs.mockk)
-    testImplementation(libs.coroutine.test)
-    testImplementation(project(":core:test"))
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.ui.test.manifest)
-    androidTestImplementation(libs.androidx.ui.test.junit4)
 }

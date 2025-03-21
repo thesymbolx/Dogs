@@ -9,8 +9,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.junit)
     implementation(libs.coroutine.test)
-    androidTestImplementation(libs.androidx.junit)
 }

@@ -25,6 +25,7 @@ navigationRuntimeKtx = "2.8.2"
 uiTooling = "1.7.5"
 mockkVersion = "1.13.17"
 androidDesugarJdkLibs = "2.1.5"
+uiToolingPreviewAndroid = "1.7.8"
 
 
 [libraries]
@@ -65,6 +66,7 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockkVersion" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
+androidx-ui-tooling-preview-android = { group = "androidx.compose.ui", name = "ui-tooling-preview-android", version.ref = "uiToolingPreviewAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

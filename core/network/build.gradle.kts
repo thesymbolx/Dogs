@@ -11,8 +11,6 @@ android {
 }
 
 dependencies {
-
-
     implementation(libs.retrofit)
     implementation(libs.retrofit.ktx.serialization)
     implementation(libs.kotlinx.serialization.json)

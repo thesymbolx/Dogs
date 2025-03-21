@@ -10,9 +10,6 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.bundles.coil)
     implementation(project(":core:design_system"))
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    implementation(libs.bundles.coil)
 }
