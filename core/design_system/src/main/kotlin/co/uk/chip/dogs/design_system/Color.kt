@@ -60,4 +60,9 @@ internal val LightColorScheme = lightColorScheme(
     surfaceVariant = surfaceVariantColor,
     onError = onErrorColor,
     error = errorColor,
+    surfaceContainer = surfaceColor,
+    surfaceContainerHighest = surfaceColor,
+    surfaceContainerLow = surfaceColor,
+    surfaceContainerHigh = surfaceColor,
+    surfaceContainerLowest = surfaceColor
 )
