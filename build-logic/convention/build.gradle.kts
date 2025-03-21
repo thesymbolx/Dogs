@@ -33,5 +33,9 @@ gradlePlugin {
             id = "uk.co.chip.convention.compose"
             implementationClass = "uk.co.chip.convention.AndroidLibraryComposeConventionPlugin"
         }
+        create("hilt") {
+            id = "uk.co.chip.convention.hilt"
+            implementationClass = "uk.co.chip.convention.AndroidHiltConventionPlugin"
+        }
     }
 }

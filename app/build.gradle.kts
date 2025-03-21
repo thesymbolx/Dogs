@@ -66,7 +66,7 @@ dependencies {
 
     implementation(libs.bundles.coil)
 
-    ksp(libs.hilt.complier)
+    ksp(libs.hilt.compiler)
     implementation(libs.hilt)
 
     testImplementation(libs.junit)

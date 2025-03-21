@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    id("uk.co.chip.convention.hilt")
     id("kotlinx-serialization")
     id("uk.co.chip.convention.library")
     id("uk.co.chip.convention.compose")
@@ -22,10 +21,6 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.navigation.compose)
-
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.hilt.complier)
-    implementation(libs.hilt)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

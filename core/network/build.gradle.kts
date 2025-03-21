@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
+    id("uk.co.chip.convention.hilt")
     id("kotlinx-serialization")
     id("uk.co.chip.convention.library")
 }
@@ -13,8 +12,6 @@ android {
 
 dependencies {
 
-    ksp(libs.hilt.complier)
-    implementation(libs.hilt)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.ktx.serialization)

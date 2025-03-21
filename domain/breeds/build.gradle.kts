@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
+    id("uk.co.chip.convention.hilt")
     id("uk.co.chip.convention.library")
 }
 
@@ -14,8 +13,6 @@ dependencies {
     implementation(project(":data:breeds"))
     implementation(project(":core:network"))
 
-    ksp(libs.hilt.complier)
-    implementation(libs.hilt)
     implementation(libs.kotlinx.collections.immutable)
 
     testImplementation(libs.junit)
