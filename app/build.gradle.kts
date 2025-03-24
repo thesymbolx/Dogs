@@ -2,9 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
-    id("kotlinx-serialization")
+    id("uk.co.chip.convention.hilt")
 }
 
 android {
@@ -65,14 +63,4 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
 
     implementation(libs.bundles.coil)
-
-    ksp(libs.hilt.compiler)
-    implementation(libs.hilt)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
